@@ -68,7 +68,7 @@ countyComplete %>%
 
 -------------
 
-A conclusão a eque chegamos com um modelo assim é algo como:
+A conclusão a que chegamos com um modelo assim é algo como:
 
 > Regressão linear simples foi utilizada para analisar a associação entre VarIndep1 e VarDep. Os resultados da regressão indicam que um modelo no formato VarDep = XXX.VarIndep1 + YYY explicam XX,XX% da variância da variável de resposta (R2 = XX,XX). O aumento de 1 unidade de VarIndep1 medida como/em [unidade] produz uma mudança de xxx em VarDep. Portanto...
 

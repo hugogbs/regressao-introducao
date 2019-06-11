@@ -85,7 +85,8 @@ No olho:
 ```{r}
 ggplot(countyComplete, aes(x = hs_grad, y = poverty)) + 
   geom_point(alpha = 0.4, size = .8) + 
-  geom_abline(slope = 0, intercept = 20, color  = "red") 
+      geom_abline(slope = -0.7, intercept = 73, color  = "red") 
+
 ```
 
 Quantificando a qualidade do modelo:
@@ -136,3 +137,33 @@ Comparando: de quanto é a redução no erro usando nosso modelo comparado com o
 ```
 
 Essa medida que acabamos de definir se chama `R^2`, ou R squared.
+
+
+```{r}
+usando_mediana = countyComplete %>% 
+  select(hs_grad, poverty) %>% 
+  mutate(
+    segundo_modelo = median(poverty), 
+    residuo = poverty - segundo_modelo, 
+    residuo_quad = residuo**2
+  )
+
+fit_mediana = usando_mediana %>% summarise(sse = sum(residuo_quad)) %>% pull(sse)
+```
+
+```{r}
+(fit_mediana - fit_modelo)/fit_mediana
+```
+
+
+
+
+
+
+
+
+
+
+
+
+

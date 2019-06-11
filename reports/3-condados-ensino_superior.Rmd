@@ -29,3 +29,37 @@ countyComplete %>%
   geom_point(alpha = 0.4, size = .5)
 ```
 
+
+```{r}
+mod <- lm(per_capita_income ~ bachelors, 
+          data = countyComplete)
+
+
+# broom, que recomendo: 
+tidy(mod)
+glance(mod) 
+```
+
+
+Estimativas/previsões do modelo:
+
+```{r}
+countyComplete %>% 
+  select(bachelors, per_capita_income) %>% 
+  add_predictions(model = mod) %>% # add o que o modelo estima p cada hs_grad
+  ggplot(mapping = aes(x = bachelors, y = per_capita_income)) + 
+  geom_point(alpha = 0.4, size = .1) + 
+  geom_line(aes(y = pred), colour = "red")  + 
+  #geom_abline(intercept = 75, slope = -.72, color  = "darkblue")  CORRIGIR
+```
+
+
+Resíduos do modelo:
+
+```{r}
+countyComplete %>% 
+  add_residuals(model = mod) %>% 
+  ggplot(aes(bachelors, per_capita_income)) + 
+  geom_point(alpha = .4, size = .5) + 
+  geom_hline(yintercept = 0, colour = "blue")
+```
